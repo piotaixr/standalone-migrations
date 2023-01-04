@@ -32,7 +32,7 @@ module StandaloneMigrations
     end
 
     def initialize(options = {})
-      default_schema = ENV['SCHEMA'] || "db/schema.rb"
+      default_schema = ENV['SCHEMA'] || "db/schema.#{schema_extension}"
       defaults = {
         :config       => "db/config.yml",
         :migrate_dir  => "db/migrate",
@@ -84,6 +84,17 @@ module StandaloneMigrations
         ".standalone_migrations"
       else
         ".#{ENV['DATABASE']}.standalone_migrations"
+      end
+    end
+
+    def schema_extension
+      case ActiveRecord.schema_format
+      when :ruby
+        "rb"
+      when :sql
+        "sql"
+      else
+        raise "Unexpected schema format"
       end
     end
 
