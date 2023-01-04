@@ -16,6 +16,7 @@ jobs:
         ar:
           - "~> 6.0.0"
           - "~> 6.1.0"
+          - "~> 7.0.0"
     env:
       NOKOGIRI_USE_SYSTEM_LIBRARIES: 1
       AR: ${{ matrix.ar }}
