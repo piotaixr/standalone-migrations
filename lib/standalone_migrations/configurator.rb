@@ -88,7 +88,7 @@ module StandaloneMigrations
     end
 
     def schema_extension
-      case ActiveRecord.schema_format
+      case ActiveRecord.try(:schema_format) || ActiveRecord::Base.schema_format
       when :ruby
         "rb"
       when :sql
